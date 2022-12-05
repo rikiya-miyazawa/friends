@@ -1,0 +1,12 @@
+<h3>以下の内容で、投稿する。</h3>
+
+<%= form_with(model: @picture, local: true) do |form| %>
+  <%= form.hidden_field :content %>
+  <%= form.hidden_field :image %>
+
+  <p>文章:<%= @picture.content %></p>
+  <p>画像:<%= @picture.image %></p>
+  <%= form.submit  "投稿する" %>
+  <%= form.submit "戻る", name: 'back' %>
+<% end %>
+
