@@ -11,18 +11,43 @@
   </head>
 
   <body>
+    <header class="header">
+      <nav class="navigation">
+        <div class="header-logo">
+          <%= link_to("Friends", new_session_path) %>
+          <%= image_tag 'boy.png', :size => '40x30'%>
+        </div>
+        <ul class="header-menus">
+          <% if logged_in? %>
+            <li>
+            <%= link_to("Profile", user_path(current_user.id)) %>
+            </li>
+            <li>
+            <%= link_to("Logout", session_path(current_user.id), method: :delete) %>
+            </li>
+          <% else %>
+            <li>
+            <%= link_to("Sign up", new_user_path) %>
+            </li>
+            <li>
+            <%= link_to("Login", new_session_path) %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
-
-    <% if logged_in? %>
-      <%= link_to "Profile", user_path(current_user.id) %>
-      <%= link_to "Logout", session_path(current_user.id), method: :delete %>
-    <% else %>
-      <%= link_to "Sign up", new_user_path %>
-      <%= link_to "Login", new_session_path %>
-    <% end %>
-
+    <div class="container">
     <%= yield %>
+    </div>
+    <footer>
+        <ul class="footer-logo" >
+          <li>
+            課題 友達繋がりアプリ
+          </li>
+        </ul>
+      </footer>
   </body>
 </html>
